@@ -30,7 +30,7 @@ class Matrix {
             }
         }
     }
-    randomize (n) {
+    randomize () {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 this.data[i][j] = Math.floor(Math.random() * 10);
@@ -63,6 +63,16 @@ class Matrix {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
                 this.data[i][j] *= n;
+            }
+        }
+    }
+
+    map(func) {
+        // apply a function to every element of matrix
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                let val = this.data[i][j];
+                this.data[i][j] = func(val);
             }
         }
     }
