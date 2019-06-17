@@ -2,12 +2,12 @@ class Matrix {
     constructor (rows, cols) {
         this.rows = rows;
         this.cols = cols;
-        this.matrix = [];
+        this.data = [];
 
         for (let i = 0; i < this.rows; i++) {
-            this.matrix[i] = [];
+            this.data[i] = [];
             for (let j = 0; j < this.cols; j++) {
-                this.matrix[i][j] = 0;
+                this.data[i][j] = 0;
             }
         }
     }
@@ -18,14 +18,14 @@ class Matrix {
             // Matrix addition
             for (let i = 0; i < this.rows; i++) {
                 for (let j = 0; j < this.cols; j++) {
-                    this.matrix[i][j] += n.matrix[i][j];
+                    this.data[i][j] += n.data[i][j];
                 }
             }
         } else {
             // Scalar addition
             for (let i = 0; i < this.rows; i++) {
                 for (let j = 0; j < this.cols; j++) {
-                    this.matrix[i][j] += n;
+                    this.data[i][j] += n;
                 }
             }
         }
@@ -33,7 +33,7 @@ class Matrix {
     randomize (n) {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {
-                this.matrix[i][j] = Math.floor(Math.random() * 10);
+                this.data[i][j] = Math.floor(Math.random() * 10);
             }
         }
     }
@@ -55,9 +55,9 @@ class Matrix {
                     // Dot product of values in col
                      let sum = 0;
                      for (let k = 0; k < a.cols; k++) {
-                         sum += a.matrix[i][k] * b.matrix[k][j];
+                         sum += a.data[i][k] * b.data[k][j];
                      }
-                     results.matrix[i][j] = sum;
+                     results.data[i][j] = sum;
                  }
              }
 
@@ -67,9 +67,21 @@ class Matrix {
              // Scalar multiplication
              for (let i = 0; i < this.rows; i++) {
                  for (let j = 0; j < this.cols; j++) {
-                     this.matrix[i][j] *= n;
+                     this.data[i][j] *= n;
                  }
              }
          }
+    }
+
+    transpose() {
+        let result = new Matrix(this.cols, this.rows);
+
+        for (let i=0; i <  this.rows; i++) {
+            for (let j=0; j <  this.cols; j++) {
+                result.data[j][i] = this.data[i][j];
+            }
+        }
+
+        return result;
     }
 }
