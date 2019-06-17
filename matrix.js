@@ -38,39 +38,33 @@ class Matrix {
         }
     }
 
-     multiply(n) {
-         if (n instanceof Matrix) {
-             // Matrix multiplication
-             if (this.cols !== n.rows) {
-                 console.log("Columns of A must match to the rows of B");
-                 return undefined;
-             }
+     static multiply(a, b) {
+         if (a.cols !== b.rows) {
+             console.log("Columns of A must match to the rows of B");
+             return undefined;
+         }
+         let results = new Matrix(a.rows, b.cols);
 
-             let a = this;
-             let b = n;
-             let results = new Matrix(this.rows, n.cols);
-
-             for (let i = 0; i < results.rows; i++) {
-                 for (let j = 0; j < results.cols; j++) {
-                    // Dot product of values in col
-                     let sum = 0;
-                     for (let k = 0; k < a.cols; k++) {
-                         sum += a.data[i][k] * b.data[k][j];
-                     }
-                     results.data[i][j] = sum;
+         for (let i = 0; i < results.rows; i++) {
+             for (let j = 0; j < results.cols; j++) {
+                 // Dot product of values in col
+                 let sum = 0;
+                 for (let k = 0; k < a.cols; k++) {
+                     sum += a.data[i][k] * b.data[k][j];
                  }
-             }
-
-             return results;
-
-         } else {
-             // Scalar multiplication
-             for (let i = 0; i < this.rows; i++) {
-                 for (let j = 0; j < this.cols; j++) {
-                     this.data[i][j] *= n;
-                 }
+                 results.data[i][j] = sum;
              }
          }
+
+         return results;
+    }
+
+    multiply(n) {
+        for (let i = 0; i < this.rows; i++) {
+            for (let j = 0; j < this.cols; j++) {
+                this.data[i][j] *= n;
+            }
+        }
     }
 
     transpose() {
@@ -83,5 +77,9 @@ class Matrix {
         }
 
         return result;
+    }
+
+    print() {
+        console.table(this.data);
     }
 }
