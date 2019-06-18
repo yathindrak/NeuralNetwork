@@ -50,6 +50,18 @@ class Matrix {
             }
         }
     }
+
+    static substract(a, b) {
+        // return new matrix a-b
+        let result = new Matrix(a.rows, a.cols);
+        for (let i = 0; i < result.rows; i++) {
+            for (let j = 0; j < result.cols; j++) {
+                result.data[i][j] = a.data[i][j] - b.data[i][j];
+            }
+        }
+        return result;
+
+    }
     randomize () {
         for (let i = 0; i < this.rows; i++) {
             for (let j = 0; j < this.cols; j++) {

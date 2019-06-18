@@ -5,9 +5,11 @@
 function setup() {
   let nn = new NeuralNetwork(2,2,1);
 
-  let input = [1, 0];
+  let inputs = [1, 0];
 
-  let output = nn.feedForward(input);
+  let targets = [1];
+
+  let output = nn.train(inputs, targets);
   console.log(output);
 }
 

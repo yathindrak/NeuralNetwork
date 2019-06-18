@@ -54,6 +54,21 @@ class NeuralNetwork {
 
         return output.toArray();
     }
+
+    train(inputs, targets) {
+        // feed forward
+        let outputs = this.feedForward(inputs);
+
+        // convert array to matrix object
+        outputs = Matrix.fromArray(outputs);
+        targets = Matrix.fromArray(targets);
+        console.log(outputs.print());
+        // calculate the error
+        // error = targets - outputs
+        let output_errors = Matrix.substract(targets, outputs);
+        // let hidden_errors =
+        console.log(output_errors.print());
+    }
 }
 
 function sigmoid(x) {
