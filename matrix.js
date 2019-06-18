@@ -109,12 +109,12 @@ class Matrix {
         }
     }
 
-    transpose() {
-        let result = new Matrix(this.cols, this.rows);
+    static transpose(matrix) {
+        let result = new Matrix(matrix.cols, matrix.rows);
 
-        for (let i=0; i <  this.rows; i++) {
-            for (let j=0; j <  this.cols; j++) {
-                result.data[j][i] = this.data[i][j];
+        for (let i=0; i <  matrix.rows; i++) {
+            for (let j=0; j <  matrix.cols; j++) {
+                result.data[j][i] = matrix.data[i][j];
             }
         }
 
