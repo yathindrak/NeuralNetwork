@@ -24,11 +24,16 @@ class NeuralNetwork {
         this.bias_h = new Matrix(this.hidden_nodes,1);
         // bias for each node in output layer
         this.bias_o = new Matrix(this.output_nodes,1);
+        // randomize bias
+        this.bias_h.randomize();
+        this.bias_o.randomize();
 
     }
 
     feedForward(input_array) {
-
+        /*
+            Generating hidden outputs
+         */
         // convert array into matrix obj
         let inputs = Matrix.fromArray(input_array);
 
@@ -38,7 +43,19 @@ class NeuralNetwork {
         hidden.add(this.bias_h);
 
         // activation function
+        hidden.map(sigmoid);
 
-        //return guess;
+        /*
+            Generating the output
+         */
+        let output = Matrix.multiply(this.weights_ho, hidden);
+        output.add(this.bias_o);
+        output.map(sigmoid);
+
+        return output.toArray();
     }
+}
+
+function sigmoid(x) {
+    return 1 / (1 + Math.exp(-x));
 }
