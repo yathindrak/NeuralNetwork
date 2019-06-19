@@ -66,8 +66,15 @@ class NeuralNetwork {
         // calculate the error
         // error = targets - outputs
         let output_errors = Matrix.substract(targets, outputs);
-        // let hidden_errors =
+
+        // in order to calculate errors in hidden layer nodes,
+        // need to do W*e . But here W should be the transpose of previous W
+        let weights_ho_tr = Matrix.transpose(this.weights_ho);
+        let hidden_errors = Matrix.multiply(weights_ho_tr, output_errors);
         console.log(output_errors.print());
+        console.log(hidden_errors.print());
+
+
     }
 }
 
